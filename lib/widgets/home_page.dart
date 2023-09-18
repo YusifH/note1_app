@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        elevation: 5,
         backgroundColor: AppConstants.cPrimary,
         title: Text(
           AppConstants.title,
@@ -46,20 +47,23 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           height: 8,
                         ),
-                        _buildTextFormField('Fənn Adı', fennAdi, TextInputType.text),
+                        _buildTextFormField(
+                            'Fənn Adı', fennAdi, TextInputType.text),
                         const SizedBox(
                           height: 10,
                         ),
                         Row(
                           children: [
                             Expanded(
-                              child: _buildTextFormField('Bal', bal, TextInputType.number),
+                              child: _buildTextFormField(
+                                  'Bal', bal, TextInputType.number),
                             ),
                             const SizedBox(
                               width: 10,
                             ),
                             Expanded(
-                              child: _buildTextFormField('Kredit', kredit, TextInputType.number),
+                              child: _buildTextFormField(
+                                  'Kredit', kredit, TextInputType.number),
                             )
                           ],
                         ),
@@ -97,6 +101,15 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           // Daxil Edilen Fenler
+           Card(
+             margin: const EdgeInsets.only(left: 10,right: 10),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Daxil Edilən Fənlər', style: AppConstants.titleStyle.copyWith(color: AppConstants.cPrimary),),
+              ),
+            ),
+          ),
           Expanded(
             child: DaxilEdilenFenler(
               onDismiss: (index) {
@@ -112,15 +125,19 @@ class _HomePageState extends State<HomePage> {
 
   TextFormField _buildTextFormField(String hintText, controller, keyBoardType) {
     return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return '';
+        }
+        return null;
+      },
       controller: controller,
       keyboardType: keyBoardType,
       decoration: InputDecoration(
           hintText: hintText,
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(
-                color: AppConstants
-                    .cPrimary),
+            borderSide: const BorderSide(color: AppConstants.cPrimary),
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
